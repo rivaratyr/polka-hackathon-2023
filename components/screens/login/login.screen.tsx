@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { 
-    View, Text, TextInput, 
+    View, Text, TextInput,
     Button, ActivityIndicator, 
     TouchableHighlight, StyleSheet } from 'react-native';
 import type {PropsWithChildren} from 'react';
@@ -47,7 +47,9 @@ function LoginScreen ({ navigation }: SectionProps): JSX.Element {
                 value={username}
                 onChangeText={text => setUsername(text)}
                 placeholder="Username" />
-            <TextInput style={styles.input} placeholder="Password"/>
+            <TextInput style={styles.input} 
+                placeholder="Password"
+                secureTextEntry={true} />
 
             <TouchableHighlight onPress={handleLogin} underlayColor="transparent">
                 <View style={styles.buttonPink}>
@@ -68,6 +70,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: '#000',
         padding: 10,
+        color: '#000',
     },
     paragraph: {
         fontSize: 18,
