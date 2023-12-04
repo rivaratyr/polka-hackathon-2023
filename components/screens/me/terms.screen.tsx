@@ -18,14 +18,14 @@ function TermsScreen ({ navigation }: SectionProps): JSX.Element {
     };
 
     const handleButtonPress = () => {
-    if (isChecked) {
-        // Navigate to another screen
-        navigation.navigate('DataCalculation');
-    } else {
-        // Show an error message
-        Alert.alert('Error', 'Please accept the terms and conditions.');
-    }
-};
+        if (isChecked) {
+            // Navigate to another screen
+            navigation.navigate('DataCalculation');
+        } else {
+            // Show an error message
+            Alert.alert('Error', 'Please accept the terms and conditions.');
+        }
+    };
 
   return (
     <View style={{ padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -45,7 +45,6 @@ function TermsScreen ({ navigation }: SectionProps): JSX.Element {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
     input: {
@@ -97,6 +96,5 @@ const styles = StyleSheet.create({
         color: '#000',
     },
 });
-
 
 export default TermsScreen;

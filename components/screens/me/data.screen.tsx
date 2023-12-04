@@ -1,21 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, TouchableOpacity, StyleSheet } from 'react-native';
+import type { PropsWithChildren } from 'react';
+import { StackNavigationProp } from '@react-navigation/stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function DataCalculationScreen (): JSX.Element {
+type SectionProps = PropsWithChildren<{
+  navigation: StackNavigationProp<any>;
+}>;
+
+const Separator = () => <View style={styles.separator} />;
+
+function DataCalculationScreen ({ navigation }: SectionProps): JSX.Element {
   const [loading, setLoading] = useState(true);
+  const [matchedPerson, setMatchedPerson] = useState<{ [key: string]: any } | undefined>(undefined);
 
   const sampleData = {
     persons: [
       {
         name: 'Alice',
+        wallet: '',
         values: [1.2, 1.3, 1.4, 1.5, 1.2 * 1.3 * 1.4 * 1.5],
       },
       {
         name: 'Bob',
+        wallet: '',
         values: [1.1, 1.2, 1.3, 1.4, 1.1 * 1.2 * 1.3 * 1.4],
       },
       {
         name: 'Charlie',
+        wallet: '',
         values: [1.3, 1.4, 1.5, 1.6, 1.3 * 1.4 * 1.5 * 1.6],
       },
     ],
@@ -25,20 +38,158 @@ function DataCalculationScreen (): JSX.Element {
     setTimeout(() => {
       setLoading(false);
     }, 3000); // Simulate data loading
+
+    AsyncStorage.getItem('username')
+      .then((username) => {
+        const matchedPerson = sampleData.persons.find((person) => person.name.toLowerCase() === username?.toLowerCase());
+
+        if (!matchedPerson) {
+          console.log('No matched person found!');
+          return;
+        } else 
+          setMatchedPerson(matchedPerson);
+        })
+      .catch((error) => {
+        console.log('Error retrieving username from AsyncStorage:', error);
+      });
+
   }, []);
 
-  if (loading) {
-    return <ActivityIndicator />;
-  }
+  const handleButtonPress = () => {
+    AsyncStorage.setItem('leverage', matchedPerson?.values[4].toString() || 0);
+    navigation.navigate('ConnectWallet');
+  };
 
   return (
     <View style={{ padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Data Calculation Screen</Text>
-      
+      {loading ? (
+        <ActivityIndicator />
+      ) : (
+      <>
+      {matchedPerson && (
+        <>
+          <Text style={styles.label}>Welcome {matchedPerson.name}!</Text>
 
+          <View style={styles.container}>
+            <View style={styles.record}>
+              <Text style={styles.recordTitle}>Tax record</Text>
+              <Text style={styles.recordValue}>{matchedPerson.values[0]}</Text>
+            </View>
+            <View style={styles.record}>
+              <Text style={styles.recordTitle}>Work record</Text>
+              <Text style={styles.recordValue}>{matchedPerson.values[1]}</Text>
+            </View>
+          </View>
 
+          <View style={styles.container}>
+            <View style={styles.record}>
+              <Text style={styles.recordTitle}>Justice record</Text>
+              <Text style={styles.recordValue}>{matchedPerson.values[2]}</Text>
+            </View>
+            <View style={styles.record}>
+              <Text style={styles.recordTitle}>Family record</Text>
+              <Text style={styles.recordValue}>{matchedPerson.values[3]}</Text>
+            </View>
+          </View>
+
+          <Text style={styles.label}>Your leverage</Text>
+          <Text style={styles.extremeValue}>{matchedPerson.values[4]}</Text>
+        </>
+      )}
+      <Text style={styles.paragraph}>This means your vote will be counted as the above value.</Text>
+      <TouchableOpacity onPress={handleButtonPress}>
+          <View style={styles.buttonPink}>
+              <Text style={styles.buttonText}>Connect your wallet</Text>
+          </View>
+      </TouchableOpacity>
+      </>
+      )}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  label: {
+    fontSize: 26,
+    width: 300,
+    color: '#000',
+    textAlign: 'center',
+    marginBottom: 10
+  },
+  extremeValue: {
+    fontSize: 36,
+    width: 300,
+    color: '#000',
+    textAlign: 'center',
+    marginBottom: 10
+  },
+  paragraph: {
+      fontSize: 18,
+      width: 300,
+      color: '#000',
+      textAlign: 'center',
+      marginBottom: 10
+  },
+  separator: {
+      marginVertical: 8,
+      borderBottomColor: '#000',
+      borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  record: {
+    backgroundColor: '#fff',
+    alignContent: 'flex-start',
+    width: 140,
+    marginRight: 10,
+    borderRadius: 5,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 4,
+      },
+      shadowOpacity: 0.3,
+      shadowRadius: 4.65,
+      elevation: 8,
+  },
+  recordTitle: {
+    fontSize: 18,
+    color: '#000',
+    textAlign: 'left',
+    margin: 10
+  },
+  recordValue: { 
+    fontSize: 24,
+    color: 'green',
+    textAlign: 'center',
+    margin: 10
+  },
+  buttonPink: {
+      marginTop: 10,
+      marginBottom: 10,
+      width: 260,
+      alignItems: 'center',
+      backgroundColor: '#FF53C8',
+      borderRadius: 5,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 4,
+      },
+      shadowOpacity: 0.3,
+      shadowRadius: 4.65,
+      elevation: 8,
+  },
+  buttonText: {
+      textAlign: 'center',
+      padding: 15,
+      fontSize: 18,
+      color: '#000',
+  },
+});
 
 export default DataCalculationScreen;

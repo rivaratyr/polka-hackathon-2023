@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-function TopicScreen (): JSX.Element {
+function CreateVoteScreen (): JSX.Element {
   const [topic, setTopic] = useState('');
 
   const handleCreateTopic = () => {
@@ -39,4 +39,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TopicScreen;
+export default CreateVoteScreen;
