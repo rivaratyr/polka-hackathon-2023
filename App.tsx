@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+/* 
 import '@walletconnect/react-native-compat';
 import { WagmiConfig } from 'wagmi'
 import { mainnet, polygon, arbitrum } from 'viem/chains'
@@ -32,7 +32,7 @@ createWeb3Modal({
   chains,
   wagmiConfig,
   defaultChain: mainnet
-})
+}) */
 
 import Header from './components/elements/header.element';
 import LoginScreen from './components/screens/login/login.screen';
@@ -49,7 +49,6 @@ const Stack = createStackNavigator();
 function App(): JSX.Element {
 
   return (
-    <WagmiConfig config={wagmiConfig}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Login" component={LoginScreen} />
@@ -62,8 +61,6 @@ function App(): JSX.Element {
           <Stack.Screen name="ConnectWallet" component={ConnectWalletScreen} />
         </Stack.Navigator> 
       </NavigationContainer>
-      <Web3Modal />
-    </WagmiConfig>
   );
 }
 

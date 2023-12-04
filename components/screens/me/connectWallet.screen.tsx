@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
 import { View, Button, Text, TouchableOpacity, StyleSheet } from 'react-native';
-/* import WalletConnectProvider from "@walletconnect/react-native-dapp";
-import WalletConnect from '@walletconnect/client'; */
 import type { PropsWithChildren } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { W3mButton } from '@web3modal/wagmi-react-native';
-import { useAccount } from 'wagmi';
+import { WalletConnectModal, useWalletConnectModal } from '@walletconnect/modal-react-native';
+
+const projectId = '3a7699b6e7786fc539586a9aaa5b470f'
+
+const metadata = {
+  name: 'MeritokDAO',
+  description: 'Vote, create votes, and participate in the governance of your country.',
+  url: 'https://meritok-dao.com',
+  icons: ['https://avatars.githubusercontent.com/u/37784886'],
+  redirect: {
+    native: 'https://',
+    universal: 'meritok-dao.com'
+  }
+}
 
 type SectionProps = PropsWithChildren<{
   navigation: StackNavigationProp<any>;
@@ -16,13 +26,29 @@ function ConnectWalletScreen ({ navigation }: SectionProps): JSX.Element {
   const navigateToVotes = () => {
       navigation.navigate('ActiveVote');
   };
+  
+  const { open, isConnected, address, provider } = useWalletConnectModal();
 
-  const { address, isConnecting, isDisconnected } = useAccount()
+  const handleConnect = async () => {
+    if (isConnected) {
+      return provider?.disconnect();
+    }
+
+    return open();
+  };
+
+  const handleDisconnect = async () => {
+    provider?.disconnect();
+  }
+
+  React.useEffect(() => {
+    provider?.disconnect();
+  }, []);
 
   return (
     <View style={{ padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        { isConnecting && <Text>Connecting...</Text> }
-        { isDisconnected && <Text>Disconnected from wallet.</Text> }
+        {/* isConnecting && <Text style={styles.paragraph}>Connecting...</Text> }
+        { isDisconnected && <Text style={styles.paragraph}>Wallet is not connected.</Text> */}
         { address ? (
         <>
             <Text style={styles.paragraph}>Wallet Address: {address}</Text>
@@ -31,10 +57,25 @@ function ConnectWalletScreen ({ navigation }: SectionProps): JSX.Element {
                     <Text style={styles.buttonText}>Participate</Text>
                 </View>
             </TouchableOpacity>
+            <TouchableOpacity onPress={handleDisconnect}>
+              <View style={styles.buttonPink}>
+                  <Text style={styles.buttonText}>Disconnect Wallet</Text>
+              </View>
+          </TouchableOpacity>
         </>
         ) : (
         <>
-          <W3mButton/>
+          {/* <W3mButton/> */}
+          <Text style={styles.paragraph}>Using a crypto wallet for anonymous voting harnesses blockchain's inherent security and privacy, upholding the principles of democratic fairness and individual privacy.</Text>
+          <TouchableOpacity onPress={handleConnect}>
+              <View style={styles.buttonPink}>
+                  <Text style={styles.buttonText}>Connect Wallet</Text>
+              </View>
+          </TouchableOpacity>
+          <WalletConnectModal 
+              projectId={projectId}
+              providerMetadata={metadata} 
+          />
         </>
         ) }
     </View>

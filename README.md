@@ -55,6 +55,4 @@ If you can't get this to work, see the [Troubleshooting](https://reactnative.dev
 - `npm install @react-navigation/drawer`
 - `npm install react-native-gesture-handler react-native-reanimated @react-native-community/masked-view`
 
-
-
-
+https://docs.walletconnect.com/web3modal/react-native/
