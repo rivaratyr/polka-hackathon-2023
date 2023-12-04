@@ -4,6 +4,23 @@ import { View, Text, ActivityIndicator } from 'react-native';
 function DataCalculationScreen (): JSX.Element {
   const [loading, setLoading] = useState(true);
 
+  const sampleData = {
+    persons: [
+      {
+        name: 'Alice',
+        values: [1.2, 1.3, 1.4, 1.5, 1.2 * 1.3 * 1.4 * 1.5],
+      },
+      {
+        name: 'Bob',
+        values: [1.1, 1.2, 1.3, 1.4, 1.1 * 1.2 * 1.3 * 1.4],
+      },
+      {
+        name: 'Charlie',
+        values: [1.3, 1.4, 1.5, 1.6, 1.3 * 1.4 * 1.5 * 1.6],
+      },
+    ],
+  };
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -15,9 +32,11 @@ function DataCalculationScreen (): JSX.Element {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Data Calculation Screen</Text>
-      {/* Display your data here */}
+      
+
+
     </View>
   );
 };

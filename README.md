@@ -50,7 +50,11 @@ If you can't get this to work, see the [Troubleshooting](https://reactnative.dev
 
 # Installations
 
-`npm install @react-navigation/native`
-`npm install react-native-screens react-native-safe-area-context`
-`npm install @react-navigation/drawer`
+- `npm install @react-navigation/native`
+- `npm install react-native-screens react-native-safe-area-context`
+- `npm install @react-navigation/drawer`
+- `npm install react-native-gesture-handler react-native-reanimated @react-native-community/masked-view`
+
+
+
 

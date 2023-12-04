@@ -3,16 +3,19 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 
-function Header (): JSX.Element {
+type Props = {
+    headerTitle: string;
+};
+
+function Header ({headerTitle}: Props): JSX.Element {
   const navigation = useNavigation();
 
   return (
     <View style={styles.headerContainer}>
       <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
-        <Text>☰</Text> {/* Hamburger Icon */}
+        <Text>☰</Text>
       </TouchableOpacity>
-      <Text style={styles.headerTitle}>My App</Text>
-      {/* ... other header content */}
+      <Text style={styles.headerTitle}>{headerTitle}</Text>
     </View>
   );
 };

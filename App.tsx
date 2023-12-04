@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler'; 
 import React from 'react';
 import type { PropsWithChildren } from 'react';
 import {
@@ -10,31 +11,30 @@ import {
   View,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-/* import { createDrawerNavigator } from '@react-navigation/drawer'; */
+import { createStackNavigator } from '@react-navigation/stack';
+
+import Header from './components/elements/header.element';
 import LoginScreen from './components/screens/login/login.screen';
 import DataCalculationScreen from './components/screens/me/data.screen';
 import TopicScreen from './components/screens/vote/topic.screen';
 import VoteScreen from './components/screens/vote/vote.screen';
 import ActiveVoteScreen from './components/screens/vote/activeVote.screen';
+import TermsScreen from './components/screens/me/terms.screen';
 
-const Stack = createNativeStackNavigator();
-/* const Drawer = createDrawerNavigator(); */
+const Stack = createStackNavigator();
 
 function App(): JSX.Element {
 
   return (
     <NavigationContainer>
-      {/* <Drawer.Navigator initialRouteName="Login">
-        <Drawer.Screen name="Login" component={LoginScreen} /> */}
-      <Stack.Navigator initialRouteName="DataCalculationScreen">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="DataCalculation" component={DataCalculationScreen} />
         <Stack.Screen name="Topic" component={TopicScreen} />
         <Stack.Screen name="Vote" component={VoteScreen} />
         <Stack.Screen name="ActiveVote" component={ActiveVoteScreen} />
-      </Stack.Navigator>
-     {/*  </Drawer.Navigator> */}
+        <Stack.Screen name="Terms" component={TermsScreen} />
+      </Stack.Navigator> 
     </NavigationContainer>
   );
 }
