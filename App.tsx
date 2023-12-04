@@ -4,6 +4,36 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import '@walletconnect/react-native-compat';
+import { WagmiConfig } from 'wagmi'
+import { mainnet, polygon, arbitrum } from 'viem/chains'
+import { createWeb3Modal, defaultWagmiConfig, Web3Modal } from '@web3modal/wagmi-react-native'
+
+
+const projectId = '3a7699b6e7786fc539586a9aaa5b470f'
+
+const metadata = {
+  name: 'MeritokDAO',
+  description: 'Vote, create votes, and participate in the governance of your country.',
+  url: 'https://meritok-dao.com',
+  icons: ['https://avatars.githubusercontent.com/u/37784886'],
+  redirect: {
+    native: 'https://',
+    universal: 'meritok-dao.com'
+  }
+}
+
+const chains = [mainnet, polygon, arbitrum]
+
+const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
+
+createWeb3Modal({
+  projectId,
+  chains,
+  wagmiConfig,
+  defaultChain: mainnet
+})
+
 import Header from './components/elements/header.element';
 import LoginScreen from './components/screens/login/login.screen';
 import DataCalculationScreen from './components/screens/me/data.screen';
@@ -19,18 +49,21 @@ const Stack = createStackNavigator();
 function App(): JSX.Element {
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="DataCalculation" component={DataCalculationScreen} />
-        <Stack.Screen name="Topic" component={TopicScreen} />
-        <Stack.Screen name="Vote" component={VoteScreen} />
-        <Stack.Screen name="CreateVote" component={CreateVoteScreen} />
-        <Stack.Screen name="ActiveVote" component={ActiveVoteScreen} />
-        <Stack.Screen name="Terms" component={TermsScreen} />
-        <Stack.Screen name="ConnectWallet" component={ConnectWalletScreen} />
-      </Stack.Navigator> 
-    </NavigationContainer>
+    <WagmiConfig config={wagmiConfig}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="DataCalculation" component={DataCalculationScreen} />
+          <Stack.Screen name="Topic" component={TopicScreen} />
+          <Stack.Screen name="Vote" component={VoteScreen} />
+          <Stack.Screen name="CreateVote" component={CreateVoteScreen} />
+          <Stack.Screen name="ActiveVote" component={ActiveVoteScreen} />
+          <Stack.Screen name="Terms" component={TermsScreen} />
+          <Stack.Screen name="ConnectWallet" component={ConnectWalletScreen} />
+        </Stack.Navigator> 
+      </NavigationContainer>
+      <Web3Modal />
+    </WagmiConfig>
   );
 }
 

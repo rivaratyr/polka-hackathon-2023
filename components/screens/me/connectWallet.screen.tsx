@@ -4,48 +4,28 @@ import { View, Button, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import WalletConnect from '@walletconnect/client'; */
 import type { PropsWithChildren } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { W3mButton } from '@web3modal/wagmi-react-native';
+import { useAccount } from 'wagmi';
 
 type SectionProps = PropsWithChildren<{
   navigation: StackNavigationProp<any>;
 }>;
 
 function ConnectWalletScreen ({ navigation }: SectionProps): JSX.Element {
-  const [walletAddress, setWalletAddress] = useState('yes');
 
   const navigateToVotes = () => {
       navigation.navigate('ActiveVote');
   };
 
-  const connectWithWalletConnect = async () => {
-    /* try {
-      // Create a new WalletConnect instance
-      const connector = new WalletConnect({ bridge: 'https://bridge.walletconnect.org' });
-
-      // Check if already connected
-      if (!connector.connected) {
-        // Create a new session
-        await connector.createSession();
-      }
-
-      // Get the wallet address from the session
-      const { accounts } = connector.session;
-      const walletAddress = accounts[0];
-
-      // Store the wallet address in AsyncStorage
-      await AsyncStorage.setItem('walletAddress', walletAddress);
-
-      // Update the state with the wallet address
-      setWalletAddress(walletAddress);
-    } catch (error) {
-      console.error('Error connecting with WalletConnect:', error);
-    } */
-  };
+  const { address, isConnecting, isDisconnected } = useAccount()
 
   return (
     <View style={{ padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        { walletAddress ? (
+        { isConnecting && <Text>Connecting...</Text> }
+        { isDisconnected && <Text>Disconnected from wallet.</Text> }
+        { address ? (
         <>
-            <Text style={styles.paragraph}>Wallet Address: {walletAddress}</Text>
+            <Text style={styles.paragraph}>Wallet Address: {address}</Text>
             <TouchableOpacity onPress={navigateToVotes}>
                 <View style={styles.buttonPink}>
                     <Text style={styles.buttonText}>Participate</Text>
@@ -54,11 +34,7 @@ function ConnectWalletScreen ({ navigation }: SectionProps): JSX.Element {
         </>
         ) : (
         <>
-            <TouchableOpacity onPress={connectWithWalletConnect}>
-                <View style={styles.buttonPink}>
-                    <Text style={styles.buttonText}>Connect</Text>
-                </View>
-            </TouchableOpacity>
+          <W3mButton/>
         </>
         ) }
     </View>
