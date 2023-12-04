@@ -5,7 +5,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type SectionProps = PropsWithChildren<{
     navigation: NativeStackNavigationProp<any>;
-  }>;
+}>;
 
 function LoginScreen ({ navigation }: SectionProps): JSX.Element {
   const [loading, setLoading] = useState(false);

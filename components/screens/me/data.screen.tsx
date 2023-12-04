@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 
-
 function DataCalculationScreen (): JSX.Element {
   const [loading, setLoading] = useState(true);
 
