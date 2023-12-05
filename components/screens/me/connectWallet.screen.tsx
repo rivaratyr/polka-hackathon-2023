@@ -3,8 +3,9 @@ import { View, Button, Text, TouchableOpacity, StyleSheet, Animated, Image, Easi
 import type { PropsWithChildren } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { WalletConnectModal, useWalletConnectModal } from '@walletconnect/modal-react-native';
+// import {PRIVATE_KEY, CONTRACT_ADDRESS, WALLETCONNECT_PROJECT_ID } from '@env';
 
-const projectId = '3a7699b6e7786fc539586a9aaa5b470f'
+const projectId = '3a7699b6e7786fc539586a9aaa5b470f';
 
 const metadata = {
   name: 'MeritokDAO',
@@ -20,7 +21,6 @@ const metadata = {
 type SectionProps = PropsWithChildren<{
   navigation: StackNavigationProp<any>;
 }>;
-
 
 function ConnectWalletScreen ({ navigation }: SectionProps): JSX.Element {
   const positionX = useRef(new Animated.Value(0)).current;
@@ -69,10 +69,9 @@ function ConnectWalletScreen ({ navigation }: SectionProps): JSX.Element {
     });
   };
 
-
-
   useEffect(() => {
     startBouncingAnimation();
+    provider?.disconnect();
   }, []);
 
   const navigateToVotes = () => {
@@ -91,13 +90,11 @@ function ConnectWalletScreen ({ navigation }: SectionProps): JSX.Element {
 
   const handleDisconnect = async () => {
     provider?.disconnect();
-  }
+  };
 
-  React.useEffect(() => {
-    provider?.disconnect();
-  }, []);
-
-
+  const submitLeverage = async () => {
+    
+  };
   
   return (
     <View style={{ padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#252525' }}>
@@ -106,16 +103,25 @@ function ConnectWalletScreen ({ navigation }: SectionProps): JSX.Element {
         { address ? (
         <>
             <Text style={styles.paragraph}>{`Wallet Address:\n`} {address}</Text>
-            <TouchableOpacity onPress={navigateToVotes}>
-                <View style={styles.buttonPink}>
-                    <Text style={styles.buttonText}>Participate</Text>
-                </View>
-            </TouchableOpacity>
             <TouchableOpacity onPress={handleDisconnect}>
               <View style={styles.buttonPink}>
                   <Text style={styles.buttonText}>Disconnect Wallet</Text>
               </View>
           </TouchableOpacity>
+
+          <TouchableOpacity onPress={submitLeverage}>
+              <View style={styles.buttonPink}>
+                  <Text style={styles.buttonText}>Submit my Leverage</Text>
+              </View>
+          </TouchableOpacity>
+
+          
+          <TouchableOpacity onPress={navigateToVotes}>
+              <View style={styles.buttonPink}>
+                  <Text style={styles.buttonText}>Participate</Text>
+              </View>
+          </TouchableOpacity>
+
         </>
         ) : (
         <>
