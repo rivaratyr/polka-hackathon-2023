@@ -99,7 +99,7 @@ function DataCalculationScreen ({ navigation }: SectionProps): JSX.Element {
           <Text style={styles.extremeValue}>{matchedPerson.values[4]}</Text>
         </>
       )}
-      <Text style={styles.paragraph}>This means your vote will be counted as the above value.</Text>
+      <Text style={styles.paragraph}>To participate in the DAO and the dcision-making process, you need to connect a crypto wallet to your account.</Text>
       <TouchableOpacity onPress={handleButtonPress}>
           <View style={styles.buttonPink}>
               <Text style={styles.buttonText}>Connect your wallet</Text>
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
       marginBottom: 10
   },
   separator: {
-      marginVertical: 20,
+      marginVertical: 10,
       borderBottomColor: '#000',
       borderBottomWidth: StyleSheet.hairlineWidth,
   },
@@ -142,15 +142,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 10,
+    margin: 10,
   },
   record: {
     backgroundColor: '#000',
     alignContent: 'flex-start',
     width: 140,
-    marginRight: 10,
+    marginRight: 20,
     borderRadius: 5,
-      shadowColor: '#000',
+      shadowColor: '#fff',
       shadowOffset: {
         width: 0,
         height: 4,

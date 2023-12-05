@@ -73,11 +73,11 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   record: {
-    backgroundColor: '#bebebe',
+    backgroundColor: '#1c1c1c',
     alignContent: 'flex-start',
     width: 320,
     borderRadius: 5,
-    shadowColor: '#000',
+    shadowColor: '#fff',
     shadowOffset: {
       width: 0,
       height: 4,
@@ -89,13 +89,13 @@ const styles = StyleSheet.create({
   },
   recordTitle: {
     fontSize: 18,
-    color: '#000',
+    color: '#fff',
     textAlign: 'left',
     margin: 10
   },
   recordDescription: { 
     fontSize: 14,
-    color: 'black',
+    color: '#fff',
     textAlign: 'left',
     margin: 10,  
   },

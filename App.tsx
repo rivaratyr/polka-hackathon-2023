@@ -72,7 +72,8 @@ function App(): JSX.Element {
       <NavigationContainer >
         <Stack.Navigator initialRouteName="Login" 
             screenOptions={{ 
-              headerStyle: { backgroundColor: '#1c1c1c' },
+              headerStyle: { backgroundColor: '#1c1c1c', borderColor: 'black', shadowColor: 'white' },
+              headerStyle: { backgroundColor: '#1c1c1c', borderColor: 'black', shadowColor: 'black' },
               headerTintColor: 'white',
               headerTitle: 'MeritoDao',
               headerRight: () => <CustomHeader/> }}>
