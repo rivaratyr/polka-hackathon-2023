@@ -54,7 +54,8 @@ function LoginScreen ({ navigation }: SectionProps): JSX.Element {
             <TextInput style={styles.input}
                 value={username}
                 onChangeText={text => setUsername(text)}
-                placeholder="Username" />
+                placeholder="Username"
+                placeholderTextColor="#bebebe" />
             <TextInput style={styles.input} 
                 placeholder="Password"
                 placeholderTextColor="#bebebe"
