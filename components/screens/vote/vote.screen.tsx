@@ -55,7 +55,7 @@ function VoteScreen ({ navigation }: SectionProps): JSX.Element {
   };
 
   return (
-    <View style={{ padding: 20, flex: 1, alignItems: 'center' }}>
+    <View style={{ padding: 20, flex: 1, alignItems: 'center', backgroundColor: '#252525' }}>
       {vote?.id && (
         <>
           <Text style={styles.label}>{vote.title}</Text>
@@ -83,14 +83,14 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 26,
     width: 300,
-    color: '#000',
+    color: '#bebebe',
     textAlign: 'center',
     marginBottom: 10
   },
   paragraph: {
     fontSize: 18,
     width: 300,
-    color: '#000',
+    color: '#bebebe',
     textAlign: 'center',
     marginBottom: 10
   },
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     width: 120,
     alignItems: 'center',
     backgroundColor: '#FF073A',
-    borderRadius: 5,
+    borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     width: 120,
     alignItems: 'center',
     backgroundColor: '#39FF14',
-    borderRadius: 5,
+    borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

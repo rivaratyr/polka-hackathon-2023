@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import type { PropsWithChildren } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Alert } from 'react-native';
@@ -28,12 +28,17 @@ function TermsScreen ({ navigation }: SectionProps): JSX.Element {
     };
 
   return (
-    <View style={{ padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={styles.paragraph}>We need to calculate your leverage!</Text>
+    <View style={{  padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#252525' }}>
+        <Text style={styles.paragraph}>{`To start using the application, we need to calculate your leverage.\n\nYou can learn more about the method of the calculation on the link below.`}</Text>
+        <Text style={styles.link}>I want to learn more about the leverage calculation.</Text>
+        <Image
+        source={require('./../../../assets/Group.png')} // Replace with the actual path to your image
+        style={styles.image}
+      />
         <Separator />
         <TouchableOpacity onPress={handleCheckboxToggle}>
             <View>
-                <Text style={styles.checkboxText}>{isChecked ? '✓' : '○'}</Text>
+                <Text style={styles.checkboxText}>{isChecked ? '☑' : '☐'}</Text>
             </View>
         </TouchableOpacity>
         <Text style={styles.paragraph}>I accept the terms and conditons.</Text>
@@ -57,11 +62,18 @@ const styles = StyleSheet.create({
     },
     paragraph: {
         fontSize: 18,
-        width: 300,
-        color: '#000',
+        width: 400,
+        color: '#bebebe',
         textAlign: 'center',
         marginBottom: 10
     },
+    link: {
+      fontSize: 18,
+      width: 400,
+      color: '#EE0BA6',
+      textAlign: 'center',
+      marginBottom: 10
+  },
     separator: {
         marginVertical: 8,
         borderBottomColor: '#000',
@@ -72,8 +84,8 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         width: 260,
         alignItems: 'center',
-        backgroundColor: '#FF53C8',
-        borderRadius: 5,
+        backgroundColor: '#EE0BA6',
+        borderRadius: 20,
         shadowColor: '#000',
         shadowOffset: {
           width: 0,
@@ -93,7 +105,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         padding: 15,
         fontSize: 32,
-        color: '#000',
+        color: '#bebebe',
     },
 });
 

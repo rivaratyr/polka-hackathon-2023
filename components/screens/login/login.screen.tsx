@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
     View, Text, TextInput,
     Button, ActivityIndicator, 
-    TouchableHighlight, StyleSheet } from 'react-native';
+    TouchableHighlight, StyleSheet, Image } from 'react-native';
 import type {PropsWithChildren} from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -36,11 +36,19 @@ function LoginScreen ({ navigation }: SectionProps): JSX.Element {
     };
 
   return (
-    <View style={{ padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#252525' }}>
       {loading ? (
-        <ActivityIndicator />
+        <ActivityIndicator 
+        size="large" // Change the size of the loading icon (small, large, or custom)
+        color="#EE0BA6" // Change the color of the loading icon
+        />
       ) : (
         <>
+            <Image
+            source={require('./../../../assets/Property1.png')} // Replace with the actual path to your image
+            style={styles.image}
+            />
+            <Separator />
             <Text style={styles.paragraph}>Please note that you need to prove that you are a citizen of Hungary.</Text>
             <Separator />
             <TextInput style={styles.input}
@@ -49,6 +57,7 @@ function LoginScreen ({ navigation }: SectionProps): JSX.Element {
                 placeholder="Username" />
             <TextInput style={styles.input} 
                 placeholder="Password"
+                placeholderTextColor="#bebebe"
                 secureTextEntry={true} />
 
             <TouchableHighlight onPress={handleLogin} underlayColor="transparent">
@@ -66,16 +75,16 @@ const styles = StyleSheet.create({
     input: {
         height: 40,
         width: 300,
-        margin: 12,
+        marginBottom: 12,
         borderBottomWidth: 1,
-        borderColor: '#000',
+        borderColor: '#bebebe',
         padding: 10,
-        color: '#000',
+        color: '#bebebe',
     },
     paragraph: {
         fontSize: 18,
         width: 300,
-        color: '#000',
+        color: '#bebebe',
         textAlign: 'center',
         marginBottom: 10
     },
@@ -89,8 +98,8 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         width: 260,
         alignItems: 'center',
-        backgroundColor: '#FF53C8',
-        borderRadius: 5,
+        backgroundColor: '#EE0BA6',
+        borderRadius: 20,
         shadowColor: '#000',
         shadowOffset: {
           width: 0,

@@ -36,7 +36,7 @@ function ActiveVoteScreen ({ navigation }: SectionProps): JSX.Element {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#EFEFEF'}}>
       <ScrollView>
-        <View style={{ padding: 20, flex: 1, alignItems: 'center' }}>
+        <View style={{ padding: 20, flex: 1, alignItems: 'center', backgroundColor: '#252525' }}>
           <Text style={styles.label}>Active Votes</Text>
 
           {sampleData.activeVotes.map((vote) => (
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 26,
     width: 300,
-    color: '#000',
+    color: '#bebebe',
     textAlign: 'center',
     marginBottom: 10
   },
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   record: {
-    backgroundColor: '#fff',
+    backgroundColor: '#bebebe',
     alignContent: 'flex-start',
     width: 320,
     borderRadius: 5,
@@ -97,14 +97,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'black',
     textAlign: 'left',
-    margin: 10
+    margin: 10,  
   },
   buttonPink: {
     margin: 10,
     width: 160,
     alignItems: 'center',
     backgroundColor: '#FF53C8',
-    borderRadius: 5,
+    borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

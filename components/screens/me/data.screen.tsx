@@ -61,15 +61,18 @@ function DataCalculationScreen ({ navigation }: SectionProps): JSX.Element {
   };
 
   return (
-    <View style={{ padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#252525' }}>
       {loading ? (
-        <ActivityIndicator />
+        <ActivityIndicator
+        size="large" // Change the size of the loading icon (small, large, or custom)
+        color="#EE0BA6" // Change the color of the loading icon
+      />
       ) : (
       <>
       {matchedPerson && (
         <>
           <Text style={styles.label}>Welcome {matchedPerson.name}!</Text>
-
+          <Separator />
           <View style={styles.container}>
             <View style={styles.record}>
               <Text style={styles.recordTitle}>Tax record</Text>
@@ -91,8 +94,8 @@ function DataCalculationScreen ({ navigation }: SectionProps): JSX.Element {
               <Text style={styles.recordValue}>{matchedPerson.values[3]}</Text>
             </View>
           </View>
-
-          <Text style={styles.label}>Your leverage</Text>
+          <Separator />
+          <Text style={styles.paragraph}>Your leverage</Text>
           <Text style={styles.extremeValue}>{matchedPerson.values[4]}</Text>
         </>
       )}
@@ -112,26 +115,26 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 26,
     width: 300,
-    color: '#000',
+    color: '#fff',
     textAlign: 'center',
-    marginBottom: 10
+    marginBottom: 30
   },
   extremeValue: {
     fontSize: 36,
     width: 300,
-    color: '#000',
+    color: '#EE0BA6',
     textAlign: 'center',
     marginBottom: 10
   },
   paragraph: {
       fontSize: 18,
       width: 300,
-      color: '#000',
+      color: '#bebebe',
       textAlign: 'center',
       marginBottom: 10
   },
   separator: {
-      marginVertical: 8,
+      marginVertical: 20,
       borderBottomColor: '#000',
       borderBottomWidth: StyleSheet.hairlineWidth,
   },
@@ -142,7 +145,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   record: {
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
     alignContent: 'flex-start',
     width: 140,
     marginRight: 10,
@@ -158,13 +161,13 @@ const styles = StyleSheet.create({
   },
   recordTitle: {
     fontSize: 18,
-    color: '#000',
-    textAlign: 'left',
+    color: '#EE0BA6',
+    textAlign: 'center',
     margin: 10
   },
   recordValue: { 
     fontSize: 24,
-    color: 'green',
+    color: '#EE0BA6',
     textAlign: 'center',
     margin: 10
   },
@@ -173,8 +176,8 @@ const styles = StyleSheet.create({
       marginBottom: 10,
       width: 260,
       alignItems: 'center',
-      backgroundColor: '#FF53C8',
-      borderRadius: 5,
+      backgroundColor: '#EE0BA6',
+      borderRadius: 20,
       shadowColor: '#000',
       shadowOffset: {
         width: 0,

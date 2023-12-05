@@ -33,6 +33,7 @@ createWeb3Modal({
   wagmiConfig,
   defaultChain: mainnet
 }) */
+//import * as Font from 'expo-font';
 
 import Header from './components/elements/header.element';
 import LoginScreen from './components/screens/login/login.screen';
@@ -45,12 +46,20 @@ import TermsScreen from './components/screens/me/terms.screen';
 import ConnectWalletScreen from './components/screens/me/connectWallet.screen';
 
 const Stack = createStackNavigator();
+/*
+Font.loadAsync({
+  'unbounded': require('./font/Unbounded-Regular.ttf'),
+});
+*/
 
 function App(): JSX.Element {
 
   return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
+      <NavigationContainer >
+        <Stack.Navigator initialRouteName="Login" 
+            screenOptions={{ 
+              headerStyle: { backgroundColor: '#1c1c1c' },
+              headerTintColor: 'white' }}>
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="DataCalculation" component={DataCalculationScreen} />
           <Stack.Screen name="Topic" component={TopicScreen} />
@@ -59,7 +68,7 @@ function App(): JSX.Element {
           <Stack.Screen name="ActiveVote" component={ActiveVoteScreen} />
           <Stack.Screen name="Terms" component={TermsScreen} />
           <Stack.Screen name="ConnectWallet" component={ConnectWalletScreen} />
-        </Stack.Navigator> 
+        </Stack.Navigator>
       </NavigationContainer>
   );
 }
