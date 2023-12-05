@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler'; 
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image, Text, View, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 /* 
@@ -52,6 +52,20 @@ Font.loadAsync({
 });
 */
 
+function CustomHeader({ navigation }: any) {
+  return (
+    <TouchableOpacity
+      style={{ flexDirection: 'row', alignItems: 'center' }}
+      onPress={() => navigation.goBack()}
+    >
+    <Image
+      source={require('./assets/logo.png')} // Replace with your image source
+      style={{ width: 30, height: 30, marginRight: 10 }}
+    />
+    </TouchableOpacity>
+  );
+}
+
 function App(): JSX.Element {
 
   return (
@@ -59,7 +73,9 @@ function App(): JSX.Element {
         <Stack.Navigator initialRouteName="Login" 
             screenOptions={{ 
               headerStyle: { backgroundColor: '#1c1c1c' },
-              headerTintColor: 'white' }}>
+              headerTintColor: 'white',
+              headerTitle: 'MeritoDao',
+              headerRight: () => <CustomHeader/> }}>
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="DataCalculation" component={DataCalculationScreen} />
           <Stack.Screen name="Topic" component={TopicScreen} />
