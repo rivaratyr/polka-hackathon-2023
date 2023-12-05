@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { 
-    View, Text, TextInput,
+    View, Text, TextInput, ScrollView, SafeAreaView,
     Button, ActivityIndicator, 
     TouchableHighlight, StyleSheet, Image } from 'react-native';
 import type {PropsWithChildren} from 'react';
@@ -36,6 +36,8 @@ function LoginScreen ({ navigation }: SectionProps): JSX.Element {
     };
 
   return (
+    <SafeAreaView style={{flex: 1, backgroundColor: '#EFEFEF'}}>
+      <ScrollView>
     <View style={{ padding: 20, flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#252525' }}>
       {loading ? (
         <ActivityIndicator 
@@ -69,6 +71,8 @@ function LoginScreen ({ navigation }: SectionProps): JSX.Element {
         </>
       )}
     </View>
+    </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -116,6 +120,8 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#000',
     },
+    image: {
+    }
 });
 
 export default LoginScreen;
