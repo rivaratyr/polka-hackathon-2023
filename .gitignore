@@ -67,3 +67,5 @@ yarn-error.log
 
 # Dev IDE's
 .vscode
+
+.env
